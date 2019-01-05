@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <script src="https://checkout.stripe.com/checkout.js"></script>
+    <script src="/assets/js/vue.min.js"></script>
+    <title>Donate // Academus</title>
+  </head>
+  <body>
+    <div class="content">
+      <div class="section group">
+        <div class="col span_4_of_6">
+          <div class="logo"></div>
+          <h1>Donate to Academus</h1>
+
+          <p>
+            We're a small team of 4 high school and college students that work on Academus in our free time. We do our best to bring you frequent updates and keep uptime to a maximum, but unfortunately time is against us in many cases.
+          </p>
+
+          <p>
+            Donations allow us to pursue Academus more than we currently do &mdash; this means more features, better uptime, and less bugs. It also assists with paying hosting costs.
+          </p>
+
+          <p>
+            If you share our goal of making education technology suck less or simply really enjoy the app, please consider donating. If you do, we will be forever grateful. If you choose not to, that's okay as well &mdash; as students ourselves, we understand how it feels to be strapped for cash.
+          </p>
+
+          <p>
+            Thank you,<br>
+            The Academus Team
+          </p>
+
+          <div class="section group team-heads">
+            <div class="col span_1_of_4">
+              <div class="team-head pasha"></div>
+              Pasha
+            </div>
+            <div class="col span_1_of_4">
+              <div class="team-head tj"></div>
+              TJ
+            </div>
+            <div class="col span_1_of_4">
+              <div class="team-head ryan"></div>
+              Ryan
+            </div>
+            <div class="col span_1_of_4">
+              <div class="team-head justin"></div>
+              Justin
+            </div>
+          </div>
+
+          <p>
+            P.S. If you want to support us but also get something in return, you can subscribe to <a href="https://blog.academus.io/scholar" target="_blank">Academus Scholar</a> or buy some <a href="https://merch.academus.io" target="_blank">Academus merch</a>. All profits from these will be put back into developing Academus.
+          </p>
+        </div>
+        <div class="col span_2_of_6">
+          <div class="donate-box" id="donate-box">
+            <h3>Support Us</h3>
+
+            <div class="amount-selector">
+              <div class="amount" v-on:click="amount = 100; customAmount = null" v-bind:class="{ selected: (amount === 100 && !customAmount) }">$1</div><div class="amount" v-on:click="amount = 500; customAmount = null" v-bind:class="{ selected: (amount === 500 && !customAmount) }">$5</div><div class="amount" v-on:click="amount = 1000; customAmount = null" v-bind:class="{ selected: (amount === 1000 && !customAmount) }">$10</div><div v-on:click="customAmount = amount / 100" v-bind:class="{ selected: (customAmount || 0) !== 0 }" class="custom-amount"><input v-model="customAmount" type="number" placeholder="Custom amount"></div>
+            </div>
+
+            <div class="perk">
+              <span v-show="finalAmount() < 500">Get a "thank you" letter from us!</span>
+              <span v-show="finalAmount() >= 500 && finalAmount() < 1000">Buy us a cup of coffee!</span>
+              <span v-show="finalAmount() >= 1000 && finalAmount() < 2000">Treat us to lunch!</span>
+              <span v-show="finalAmount() >= 2000 && finalAmount() < 6900">Power Academus for an entire month!</span>
+              <span v-show="finalAmount() === 6900">Nice.</span>
+              <span v-show="finalAmount() > 6900 && finalAmount() < 10000">You're literally the best.</span>
+              <span v-show="finalAmount() >= 10000 && finalAmount() < 50000">If you follow through with this, we'll record a video of the entire team personally thanking you.</span>
+              <span v-show="finalAmount() >= 50000"><img src="/assets/img/pika.png" style="max-width: 100%"></span>
+            </div>
+
+            <button class="button-big" v-on:click="checkout()">
+              Donate
+            </button>
+
+            <form action="/donate" method="POST" id="stripeForm">
+              <input type="hidden" name="stripeToken" id="stripeToken">
+              <input type="hidden" name="amount" v-model.number="finalAmount()">
+            </form>
+          </div>
+
+          <div class="legalese">
+            Donation Terms:
+            <ul>
+              <li>This donation is non-refundable.</li>
+              <li>Since we aren't recognized by the IRS as a charity, this donation is not tax deductible.</li>
+              <li>You will not receive anything in return for this donation (unless otherwise stated above). If you want to, buy <a href="https://blog.academus.io/scholar" target="_blank">Academus Scholar</a> or some <a href="https://merch.academus.io" target="_blank">merch</a>.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/assets/js/donate.js"></script>
+  </body>
+</html>
