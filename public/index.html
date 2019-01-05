@@ -80,6 +80,8 @@
               Donate
             </button>
 
+            <a href="https://cash.app/$academus" class="cash-app">Donate via Cash App instead</a>
+
             <form action="/donate" method="POST" id="stripeForm">
               <input type="hidden" name="stripeToken" id="stripeToken">
               <input type="hidden" name="amount" v-model.number="finalAmount()">
@@ -89,6 +91,7 @@
           <div class="legalese">
             Donation Terms:
             <ul>
+              <li>These terms apply to donations made through this website (e.g. not via Cash App).</li>
               <li>This donation is non-refundable.</li>
               <li>Since we aren't recognized by the IRS as a charity, this donation is not tax deductible.</li>
               <li>You will not receive anything in return for this donation (unless otherwise stated above). If you want to, buy <a href="https://blog.academus.io/scholar" target="_blank">Academus Scholar</a> or some <a href="https://merch.academus.io" target="_blank">merch</a>.</li>
