@@ -80,7 +80,7 @@
               Donate
             </button>
 
-            <a href="https://cash.app/$academus" class="cash-app">Donate via Cash App instead</a>
+            <a v-bind:href="'https://cash.app/$academus/' + Math.round(finalAmount() / 100)" class="cash-app">Donate via Cash App instead</a>
 
             <form action="/donate" method="POST" id="stripeForm">
               <input type="hidden" name="stripeToken" id="stripeToken">
